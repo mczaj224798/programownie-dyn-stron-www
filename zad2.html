@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+    html,body{margin:0;padding:0;}
+    body{background-color: grey;}
+
+    .outer {
+        width: 200px;
+        height: 200px;
+        background-color: white;
+        border: 4px solid white;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .outer-atop-small {
+        position: fixed;
+        width: 80px;
+        height: 80px;
+        background-color: white;
+        /* border: 4px solid white; */
+        border-radius: 50%;
+        overflow: hidden;
+        z-index: 2;
+        margin-left: 20px;
+        margin-top: 61px;
+    }
+
+    .germany-inner {
+        height: 70px;
+        width: 200px;
+        position: relative;
+    } 
+
+    .greenland-inner {
+        height: 100px;
+        width: 200px;
+        position: relative;
+    } 
+
+    .greenland-inner-small {
+        height: 40px;
+        width: 80px;
+        position: relative;
+    } 
+
+    .color-black {
+        background-color: black;
+    }    
+
+    .color-yellow {
+        background-color: yellow;
+    }    
+
+    .color-red {
+        background-color: red;
+    }    
+
+    .color-white {
+        background-color: white;
+    } 
+
+</style>
+<div class="outer">
+    <div class="germany-inner color-black">
+    </div>
+     <div class="germany-inner color-red">
+    </div>
+    <div class="germany-inner color-yellow">
+    </div>
+</div>
+
+
+
+
+<div class="outer">
+
+<div class="outer-atop-small">
+    <div class="greenland-inner-small color-red">
+    </div>
+    <div class="greenland-inner-small color-white">
+    </div>
+</div>
+    <div class="greenland-inner color-white">
+    </div>
+    <div class="greenland-inner color-red">
+    </div>
+</div>
+
+
+
+</body>
+</html> 
