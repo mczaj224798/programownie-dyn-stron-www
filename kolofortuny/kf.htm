@@ -1,0 +1,42 @@
+<!doctype html>
+ 	<!-- 
+ 		CSS JS JSON PETLE TWORZENIE ELEMENTOW WKLADANIE ELEMENTOW SPRAWDZENIE TEKSTU ETC 
+
+	WIEDZA : 
+	https://www.w3schools.com/js/js_htmldom_eventlistener.asp
+
+	KOLO FORTUNY
+	
+	tło pod spodem (css background image, background position , background size)
+	dwa przyciski tworzone funkcją Start Game : jeden start drugie Autor 
+	Start zaczyna gre A
+	Autor : Fixed div szer/wys 60% 60% , prawy gorny rog zamknij, z informacją o autorze imie nazwisko numer albumu cos od siebie :)
+
+	GRA:
+
+ 	Na początku trzeba stworzyc ładne okienka pokazujace odgadywane losowo z JSONa słowo, proszę użyć róznych cssow np box-shadow każda litera to osobno stworzony np span.
+	Potem w polu tekstowym duzym wysrodkowanym pod hasłem prosimy uzytkownika o litere. Jeśli w haśle są takie litery to odkrywamy je.
+	Jeśli brak takiej litery to odejmuje od zyć 1 punkt.
+	Jeśli wszystkie litery odgadlismy to dodajemy uzytkownikowi 5 dodatkowych zyć i losujemy gre od początku.
+	W prawym gornym rogu pokazujemy liczbę zyć
+ 	-->
+
+	<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+
+	</head>
+	<body>
+
+
+
+		<div id="panstwa"></div>
+		<div id="wrap">
+			<input type="text" placeholder="wpisz litere" id="wpisz_litere" value="mojalitera"/>
+			<button id="graj">GRAJ</button>
+		</div>
+		<script type="text/javascript" src="countries.js"></script>		
+		<script type="text/javascript" src="fortuna.js"></script>
+	</body>
+	</html>
