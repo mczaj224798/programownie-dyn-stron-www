@@ -1,70 +1,169 @@
 
-var game = {
-  zdobyte : 0,
-  zycia : 1,
-}
+class Start {
+  #wrap;
+  #startButton;
+  #authorButton;
+  #backButton;
+  #authorText;
 
-// alert(data[0]['country']);
-let box = document.getElementById("wrap");
-
-const COUTNRIES_COUNT = 247
-let randomized = getRandomInt(0, COUTNRIES_COUNT)
-let word = data[randomized]['country'];
-
-let letters = []
-
-for (let i = 0; i < word.length; i += 1) {
-  letters[i] = document.createElement('span');
-  if ( word[i] === ' ') {
-    letters[i].classList.add("letter-space")
-  } else {
-    letters[i].classList.add("letter")
+  constructor(wrap) {
+    this.#wrap = document.getElementById(wrap);
+    this.#init();
   }
-  letters[i].innerHTML = word[i];
-  box.appendChild(letters[i]);
+
+  #init() {
+    this.#startButton = DOMHelper.addElementWithClass(this.#wrap, "button", ["center"], "Start");
+    this.#authorButton = DOMHelper.addElementWithClass(this.#wrap, "button", ["center"], "Author");
+    this.#startButton.addEventListener("click", func => {this.#startButtonHandler()});
+    this.#authorButton.addEventListener("click", func => {this.#authorButtonHandler()});
+  }
+
+  #startButtonHandler() {
+    this.#clearStartScreen();
+    let game = new Game("wrap");
+  }
+
+  #authorButtonHandler() {
+    this.#clearStartScreen();
+    const string = "Maciej Czajkowski<br>Nr Albumu: 224798<br>Nieustannie przegrywana walka z CSS...";
+    this.#authorText = DOMHelper.addElementWithClass(this.#wrap, "div", ["text-field"], string);
+    this.#backButton = DOMHelper.addElementWithClass(this.#wrap, "button", ["back-button"], "X");
+    this.#backButton.addEventListener("click", func => {this.#backButtonHandler()});
+  }
+
+  #backButtonHandler() {
+    this.#clearAuthorScreen();
+    this.#init();
+  }
+
+  #clearAuthorScreen() {
+    this.#wrap.removeChild(this.#backButton);
+    this.#wrap.removeChild(this.#authorText);
+  }
+
+  #clearStartScreen() {
+    this.#wrap.removeChild(this.#startButton);
+    this.#wrap.removeChild(this.#authorButton);
+  }
 }
 
-//
-// for (var i = 0; i < data[0]['country'].length; i += 1) {
-//
-//
-//     // alert(data[0]['country'][i]);
-//   }
 
+class Game {
+  #wrap;
+  #letterBox;
+  #playButton;
+  #passInput;
+  #lives;
+  #word;
+  #letters;
+  #lettersSet;
+  #lettersCount;
+  #liveBox;
+  #buttonBox;
 
-// addElement("wrap");
-//LISTENERS
+  static COUTNRIES_COUNT = 247
 
-document.getElementById("graj").addEventListener("click", Sprawdz_Litery);
-// alert(game.zycia);
+  constructor(wrap) {
+    this.#wrap = document.getElementById(wrap);
+    this.#init();
+  }
 
+  #init() {
+    this.#lives = 5;
+    this.#liveBox =  DOMHelper.addElementWithClass(this.#wrap, "div", ["box", "text-right"], "Lives: " + this.#lives);
 
-//FUNKCJE
-function Sprawdz_Litery() {
-  var liter = document.getElementById("wpisz_litere").value;
-  // alert(liter);
-  // alert(getRandomInt(10,20));
+    this.#letterBox =  DOMHelper.addElementWithClass(this.#wrap, "div", ["box"], null);
+    this.#buttonBox =  DOMHelper.addElementWithClass(this.#wrap, "div", ["box"], null);
+
+    this.#playButton = DOMHelper.addElementWithClass(this.#buttonBox, "button", ["play-button"], "Graj");
+    this.#passInput = DOMHelper.addElementWithClass(this.#buttonBox, "input", ["margin-null-auto"], "Graj");
+
+    this.#playButton.addEventListener("click", func => {this.#checkButtonHandler()});
+
+    this.#word = data[this.#getRandomInt()]['country'].toUpperCase();
+    this.#letters = []
+    this.#lettersSet = new Set();
+    console.log(this.#word);
+    for (let i = 0; i < this.#word.length; i += 1) {
+      this.#letters[i] = document.createElement('span');
+      this.#letters[i].classList.add("letter");
+      if ( this.#word[i] === ' ') {
+        this.#letters[i].classList.add("background-gray")
+      } else {
+        this.#lettersSet.add(this.#word[i]);
+        this.#letters[i].classList.add("background-orange")
+      }
+      this.#letterBox.appendChild(this.#letters[i]);
+    }
+    this.#lettersCount = this.#lettersSet.size;
+  }
+
+  #checkButtonHandler() {
+    let input = this.#passInput.value.toString().toUpperCase();
+    let found = false;
+    if ( this.#lettersSet.has(input)) {
+      found = true;
+      for (let i = 0; i < this.#word.length; i += 1) {
+        if (input === this.#word[i]) {
+          this.#letters[i].classList.remove("background-orange");
+          this.#letters[i].classList.add("background-beige");
+          this.#letters[i].innerHTML = this.#word[i];
+        }
+      }
+      this.#lettersSet.delete(input);
+      this.#lettersCount--;
+      if (this.#lettersCount === 0) {
+        console.log("Won!");
+        this.#clear();
+        this.#init();
+      }
+    }
+    if (!found) {
+      this.#decrementLives();
+      if (this.#lives === 0) {
+        console.log("Game Over!");
+        this.#gameOver();
+      }
+    }
+
+    this.#passInput.value = "";
+  }
+
+  #getRandomInt() {
+    let min = Math.ceil(0);
+    let max = Math.floor(Game.COUTNRIES_COUNT);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  #clear() {
+    this.#wrap.removeChild(this.#letterBox);
+    this.#wrap.removeChild(this.#liveBox);
+    this.#wrap.removeChild(this.#buttonBox);
+
+  }
+
+  #decrementLives() {
+    this.#lives--;
+    this.#liveBox.innerHTML = "Lives: "  + this.#lives;
+  }
+
+  #gameOver() {
+    this.#clear();
+    let endBox = DOMHelper.addElementWithClass(this.#wrap, "div", ["text-center", "text-big"], "Game Over !");
+  }
+
 }
 
-//
-// function addElement(mydiv)
-// {
-//
-//   newDiv = document.createElement("span");
-//   newDiv.innerHTML = "jasiokotek";
-//
-//   my_div = document.getElementById(mydiv);
-//   document.body.insertBefore(newDiv, my_div);
-//
-//   newDiv2 = document.createElement("span");
-//   newDiv2.innerHTML = "jasiokotek2";
-//   document.body.insertBefore(newDiv2, my_div.nextSibling);
-//
-//   newDiv.classList.add("mystyle");
-// }
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
+class DOMHelper {
+  static addElementWithClass(parent, element, cl, tag) {
+    let box =  document.createElement(element);
+    cl.forEach(cls => {box.classList.add(cls);})
+    if (tag !== null) {
+      box.innerHTML = tag;
+    }
+    parent.appendChild(box);
+    return box;
+  }
 }
+
+let start = new Start("wrap");
