@@ -70,13 +70,14 @@ class Game {
 
   #init() {
     this.#lives = 5;
-    this.#liveBox =  DOMHelper.addElementWithClass(this.#wrap, "div", ["box", "text-right"], "Lives: " + this.#lives);
+    this.#liveBox =  DOMHelper.addElementWithClass(this.#wrap, "div", ["box", "text-right", "color-white"], "Lives: " + this.#lives);
 
-    this.#letterBox =  DOMHelper.addElementWithClass(this.#wrap, "div", ["box"], null);
-    this.#buttonBox =  DOMHelper.addElementWithClass(this.#wrap, "div", ["box"], null);
+    this.#letterBox =  DOMHelper.addElementWithClass(this.#wrap, "div", ["box", "center"], null);
+    this.#buttonBox =  DOMHelper.addElementWithClass(this.#wrap, "div", ["box", "center"], null);
 
-    this.#playButton = DOMHelper.addElementWithClass(this.#buttonBox, "button", ["play-button"], "Graj");
-    this.#passInput = DOMHelper.addElementWithClass(this.#buttonBox, "input", ["margin-null-auto"], "Graj");
+    this.#playButton = DOMHelper.addElementWithClass(this.#buttonBox, "button", ["center"], "Graj");
+    this.#passInput = DOMHelper.addElementWithClass(this.#buttonBox, "input", ["center"], "Graj");
+
 
     this.#playButton.addEventListener("click", func => {this.#checkButtonHandler()});
 
@@ -149,7 +150,7 @@ class Game {
 
   #gameOver() {
     this.#clear();
-    let endBox = DOMHelper.addElementWithClass(this.#wrap, "div", ["text-center", "text-big"], "Game Over !");
+    let endBox = DOMHelper.addElementWithClass(this.#wrap, "div", ["text-field", "text-big"], "Game Over !");
   }
 
 }

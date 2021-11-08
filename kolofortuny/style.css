@@ -1,7 +1,5 @@
-/*#wrap{position: relative;float: bottom;width: 100%;border: 1px solid red;}*/
 body{
     background-image: url("bg.jpg");
-    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -15,6 +13,11 @@ body{
     margin: 0 auto;
     width: 100%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 .box {
     display: inline-block;
@@ -42,10 +45,9 @@ body{
 }
 .letter{
     position: relative;
-    /*margin:0 auto;*/
     display: inline-block;
-    margin: 0 auto;
-    float: left;
+    margin: 0 0;
+    /*float: left;*/
     width: 60px;
     height: 60px;
     border-style: solid;
@@ -54,12 +56,10 @@ body{
     text-align: center;
     font-size: 40px;
     line-height: 60px;
-    /*background-color: beige*/
 }
 
 .background-orange{
     background-color: orange}
-
 
 .background-beige{
     background-color: beige}
@@ -68,7 +68,6 @@ body{
     background-color: gray}
 
 input {
-    position: absolute;
     width: 100px;
     height: 45px;
 }
@@ -78,33 +77,21 @@ button {
     height: 50px;
 }
 
-
-.margin-null-auto {
-    margin:0 auto;
-}
-
-.text-center {
-    text-align: center;
-}
-
 .text-big {
     font-size : 50px;
 }
 
-.center {
-    margin-right:55%;
-    margin-left: 47%;
+.color-white {
+    color : white;
 }
 
 .text-field {
-    position: absolute;
+    position: relative;
     background-color: white;
     text-size: 30px;
     color: black;
-    width: 60%;
-    height: 60%;
-    margin-left: 20%;
-    /*margin: 0 auto;*/
+    width: 60vw;
+    height: 60vh;
     border-style: solid;
     border-width: 3px;
     border-color: black;
@@ -115,7 +102,12 @@ button {
     overflow: hidden;
     left: 80%;
     top: 0;
-    width: 50px;
-    height: 50px;
+    width: 25px;
+    height: 25px;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
 }
 
