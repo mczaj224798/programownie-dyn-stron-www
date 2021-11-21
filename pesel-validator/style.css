@@ -1,0 +1,29 @@
+body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    width: 100px;
+    height: 45px;
+}
+
+.small {
+    width: 30px;
+    height: 30px; 
+}
+
+.long {
+    width: 150px;
+    height: 30px; 
+}
+
+button {
+    width: 100px;
+    height: 30px;
+    font-size: 4px;
+}
+
+
