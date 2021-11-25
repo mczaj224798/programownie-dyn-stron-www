@@ -6,24 +6,44 @@ body{
 }
 
 input {
-    width: 100px;
+    width: 150px;
     height: 45px;
 }
 
 .small {
-    width: 30px;
-    height: 30px; 
+    width: 50px;
+    height: 30px;
 }
 
 .long {
-    width: 150px;
-    height: 30px; 
+    width: 200px;
+    height: 30px;
 }
 
 button {
     width: 100px;
-    height: 30px;
-    font-size: 4px;
+    height: 50px;
+    font-size: 15px;
+    color: black;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#header {
+    font-family: "DejaVu Serif";
+    font-size: medium;
+}
+
+#listing {
+    font-family: "DejaVu Serif";
+    font-size: small;
+    text-align: center;
 }
 
 
